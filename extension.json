@@ -21,6 +21,9 @@
 		"GlobalUserPageMagic": "GlobalUserPage.i18n.magic.php"
 	},
 	"Hooks": {
+		"GetPreferences": [
+			"MediaWiki\\GlobalUserPage\\Hooks::onGetPreferences"
+		],
 		"TitleIsAlwaysKnown": [
 			"MediaWiki\\GlobalUserPage\\Hooks::onTitleIsAlwaysKnown"
 		],
