@@ -40,9 +40,9 @@ class CacheInvalidator {
 	}
 
 	public function invalidate() {
-		global $wgUseSquid, $wgUseFileCache;
+		global $wgUseSquid, $wgUseFileCache, $wgGUPUseCache;
 
-		if ( !$wgUseSquid && !$wgUseFileCache && !$this->options ) {
+		if ( !$wgUseSquid && !$wgUseFileCache && !$wgGUPUseCache, && !$this->options ) {
 			// No squid and no options means nothing to do!
 			return;
 		}
