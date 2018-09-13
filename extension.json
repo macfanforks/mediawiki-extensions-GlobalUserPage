@@ -50,7 +50,8 @@
 		"GlobalUserPageAPIUrl": "https://example.org/w/api.php",
 		"GlobalUserPageTimeout": 10,
 		"GlobalUserPageFooterKey": "globaluserpage-footer",
-		"GlobalUserPageDBname": "examplewiki"
+		"GlobalUserPageDBname": "examplewiki",
+		"GUPUseCache": false
 	},
 	"ResourceModules": {
 		"ext.GlobalUserPage": {
