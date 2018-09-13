@@ -35,7 +35,7 @@ class GlobalUserPage extends Article {
 	 * Cache version of action=parse
 	 * output
 	 */
-	const PARSED_CACHE_VERSION = 2;
+	const PARSED_CACHE_VERSION = 3;
 
 	/**
 	 * @var Config
@@ -102,6 +102,9 @@ class GlobalUserPage extends Article {
 
 		// Load ParserOutput modules...
 		$this->loadModules( $out, $parsedOutput );
+
+		// Add indicators (T149286)
+		$out->setIndicators( $parsedOutput['indicators'] );
 	}
 
 	/**
@@ -265,8 +268,12 @@ class GlobalUserPage extends Article {
 	}
 
 	/**
+	 * We trust that the remote wiki has done proper HTML escaping and isn't
+	 * crazy by having raw HTML enabled.
+	 *
 	 * @param string $touched The page_touched for the page
-	 * @return array
+	 * @return array|bool
+	 * @return-taint escaped
 	 */
 	public function getRemoteParsedText( $touched ) {
 		$langCode = $this->getContext()->getLanguage()->getCode();
@@ -341,7 +348,7 @@ class GlobalUserPage extends Article {
 			'disableeditsection' => 1,
 			'disablelimitreport' => 1,
 			'uselang' => $langCode,
-			'prop' => 'text|modules|jsconfigvars',
+			'prop' => 'text|modules|jsconfigvars|indicators',
 			'formatversion' => 2,
 		];
 		$data = $this->mPage->makeAPIRequest( $params );
